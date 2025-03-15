@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/register/register",
+    "pages/login/login"
+    
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "登录"
+  }
+}

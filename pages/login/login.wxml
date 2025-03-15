@@ -1,0 +1,38 @@
+<!--pages/login/login.wxml-->
+<navigation-bar title="" back="{{false}}" color="#ffffff" background="#ffb241" />
+
+<view class="login-container">
+
+	<view class="logo-container">
+		<image class="logo" src="../../assets/img_login_bg.png" mode="" />
+	</view>
+
+	<view class="login-parent-container">
+		<text class="login-title-tips">登录</text>
+		<view class="login-username-container">
+			<image src="/image/login.png" mode="" />
+			<input placeholder="请输入用户名"  bindinput="eventUsernameHandle" value="{{username}}" />
+		</view>
+
+		<view class="login-password-container">
+			<image src="/image/password.png" mode="" />
+			<input placeholder="请输入密码" password="true" bindinput="eventPasswordHandle" value="{{password}}" />
+		</view>
+
+		<view class="forget-pwd-container">
+			 <view class="forget-pwd-left-container">
+				<switch  type="checkbox"  checked="{{checked}}"  bindchange="checkboxChange" />
+				<text>记住密码</text>
+			 </view>
+			<view class="forget-pwd-right-container" bind:tap="onRegisterHandle">
+		   <text class="tips">还没有账号？</text>
+			 <text class="register-text">注册</text>
+		</view>
+
+		</view>
+
+		<view class="login-btn-container"> <button bind:tap="onLoginHandle">登录</button></view>
+
+	</view>
+
+</view>

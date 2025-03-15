@@ -1,0 +1,43 @@
+<!--pages/register/register.wxml-->
+<navigation-bar title="" back="{{true}}" color="white" background="#ffb241"/>
+
+
+<view class="login-container">
+
+<view class="logo-container">
+	<image class="logo" src="../../assets/img_login_bg.png" mode="" />
+</view>
+
+<view class="login-parent-container">
+	<text class="login-title-tips">注册</text>
+	<view class="login-username-container">
+		<image src="/image/login.png" mode="" />
+		<input placeholder="请输入用户名" bindinput="onUsernameInput" />
+	</view>
+
+	<view class="login-password-container">
+		<image src="/image/password.png" mode="" />
+		<input placeholder="请输入密码" password="true" bindinput="onPasswordInput" />
+	</view>
+
+  <view class="login-password-container">
+		<image src="/image/password.png" mode="" />
+		<input placeholder="请再次密码" password="true" bindinput="onConfirmPasswordInput" />
+	</view>
+
+  <view class="login-password-container">
+		<image src="/image/phone.png" mode="" />
+		<input placeholder="请输入电话号码" bindinput="onPhoneNumberInput"/>
+	</view>
+  
+  <view class="login-password-container">
+		<image src="/image/address.png" mode="" />
+		<input placeholder="请输入家庭号" bindinput="onFamilyNumberInput"/>
+	</view>
+
+	<view class="login-btn-container"> <button bind:tap="onRegister">注册</button></view>
+
+
+</view>
+
+</view>
