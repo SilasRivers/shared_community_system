@@ -1,0 +1,14 @@
+<view class="bottom-tabbar">
+    <view class="tabbar-item" bindtap="navigateToPage" data-url="/pages/index/index">
+        <image src="/image/address.png" mode="aspectFit"></image>
+        <text>首页</text>
+    </view>
+    <view class="tabbar-item" bindtap="navigateToPage" data-url="/pages/submit/submit">
+        <image src="/image/submit.png" mode="aspectFit"></image>
+        <text>发布</text>
+    </view>
+    <view class="tabbar-item" bindtap="navigateToPage" data-url="/pages/me/me">
+        <image src="/image/me.png" mode="aspectFit"></image>
+        <text>我的</text>
+    </view>
+</view>    
