@@ -11,12 +11,12 @@
 		<text class="login-title-tips">登录</text>
 		<view class="login-username-container">
 			<image src="/image/login.png" mode="" />
-			<input placeholder="请输入用户名"  bindinput="eventUsernameHandle" value="{{username}}" />
+			<input placeholder="请输入用户名"  bindinput="onUsernameInput" value="{{username}}" />
 		</view>
 
 		<view class="login-password-container">
 			<image src="/image/password.png" mode="" />
-			<input placeholder="请输入密码" password="true" bindinput="eventPasswordHandle" value="{{password}}" />
+			<input placeholder="请输入密码" password="true" bindinput="onPasswordInput" value="{{password}}" />
 		</view>
 
 		<view class="forget-pwd-container">
@@ -31,7 +31,7 @@
 
 		</view>
 
-		<view class="login-btn-container"> <button bind:tap="onLoginHandle">登录</button></view>
+		<view class="login-btn-container"> <button bind:tap="onLogin">登录</button></view>
 
 	</view>
 

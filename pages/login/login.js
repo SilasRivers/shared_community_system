@@ -19,7 +19,7 @@ Page({
         username: wx.getStorageSync("username"),
         password: wx.getStorageSync("password"),
       })
-      this.setData({checked:wx.getStorageSync('checked')})
+      this.setData({ checked: wx.getStorageSync('checked') })
     }
   },
 
@@ -36,25 +36,29 @@ Page({
   },
 
 
-  eventUsernameHandle(options) {
+  onUsernameInput(e) {
     this.setData({
-      username: options.detail.value
+      username: e.detail.value
     })
 
   },
 
 
-  eventPasswordHandle(options) {
+  onPasswordInput(e) {
     this.setData({
-      password: options.detail.value
+      password: e.detail.value
     })
   },
 
   /**
    * 注册
    */
-  onLoginHandle() {
-    if (this.data.username.trim() === '') {
+  onLogin() {
+    const {
+      username,
+      password
+    } = this.data
+    if (username.trim() === '') {
       wx.showToast({
         title: '请输入用户名',
         icon: "error"
@@ -62,40 +66,53 @@ Page({
       return
     }
 
-    if (this.data.password.trim() === '') {
+    if (password.trim() === '') {
       wx.showToast({
         title: '请输入密码',
         icon: "error"
       })
       return
     }
-
-
-    if (this.data.username === wx.getStorageSync("username") && this.data.password === wx.getStorageSync("password")) {
-      wx.showToast({
-        title: '登录成功',
-        icon: 'success',
-        success: () => {
-          setTimeout(() => {
-            wx.navigateBack()
-          }, 1000);
+    // 调用云函数
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {
+        username,
+        password
+      },
+      success: res => {
+        if (res.result.code === 200) {
+          wx.showToast({
+            title: '登录成功',
+            icon: 'success'
+          })
+          // 存储 token 到本地
+          wx.setStorageSync('token', res.result.token)
+          // 跳转到首页
+          wx.navigateTo({
+            url: '/pages/index/index'
+          })
+        } else {
+          wx.showToast({
+            title: res.result.message,
+            icon: 'none'
+          })
         }
-      })
-    } else {
-      wx.showToast({
-        title: '用户名或密码错误',
-        icon: 'error',
-
-      })
-    }
-  },
-
+      },
+      fail: err => {
+        console.error('登录调用云函数失败：', err)
+        wx.showToast({
+          title: '登录失败',
+          icon: 'none'
+        })
+      }
+    })
+},
 
   /**
    * 注册
    */
   onRegisterHandle() {
-
     wx.navigateTo({
       url: '/pages/register/register',
     })
