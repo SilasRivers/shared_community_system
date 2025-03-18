@@ -53,3 +53,55 @@
   margin-right: 5px; /* 图标与文字间的间距 */
   vertical-align: middle; /* 辅助图标和文字垂直对齐 */
 }
+
+/* 功能服务*/
+.navi-services {
+  height: 253rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  margin-top: 10rpx;
+  border-radius: 12rpx;
+  box-shadow: 0rpx 2rpx 20rpx 0rpx rgba(204, 204, 204, 0.2);
+}
+
+.navi-services-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+  margin-top: 24rpx;
+}
+.navi-services-title-left {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 600;
+}
+.navi-services-title-right {
+  font-size: 24rpx;
+  color: #999;
+}
+.navi-services-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+  margin-top: 32rpx;
+}
+.navi-services-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.navi-services-list-item image {
+  width: 60rpx;
+  height: 60rpx;
+}
+.navi-services-list-item text {
+  font-size: 26rpx;
+}
+/* 功能服务结束*/

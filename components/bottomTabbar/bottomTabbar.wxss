@@ -30,3 +30,9 @@
 .tabbar-item text {
   font-size: 12px;
 }
+
+
+/* 底部导航栏变色 */
+.active {
+  background-color: red; /* 这里设置点击后的底色，可根据需求修改 */
+}

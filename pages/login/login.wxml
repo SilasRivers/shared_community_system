@@ -4,7 +4,7 @@
 <view class="login-container">
 
 	<view class="logo-container">
-		<image class="logo" src="../../assets/img_login_bg.png" mode="" />
+		<image class="logo" src="/image/login/login_background.png" mode="" />
 	</view>
 
 	<view class="login-parent-container">

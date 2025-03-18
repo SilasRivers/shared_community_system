@@ -1,21 +1,47 @@
 <view class="page-container">
-    <!-- 社区公告 -->
-    <view class="community-notice">
-      <image src="/image/index/notice.png" class="notice-icon"></image>
-        <text>{{communityNotice}}</text>
+  <!-- 社区公告 -->
+  <view class="community-notice">
+    <image src="/image/index/notice.png" class="notice-icon"></image>
+    <text>{{communityNotice}}</text>
+  </view>
+  <!-- 轮播图 -->
+  <swiper class="swiper-container" indicator-dots autoplay interval="3000" circular>
+    <block wx:for="{{hotItems}}" wx:key="id">
+      <swiper-item>
+        <image src="{{item.imageUrl}}" mode="aspectFill"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- 功能区 -->
+  <view class="navi-services">
+    <view class="navi-services-title">
+      <view class="navi-services-title-left">功能服务</view>
+      <view class="navi-services-title-right">更多</view>
     </view>
-    <!-- 轮播图 -->
-    <swiper class="swiper-container" indicator-dots autoplay interval="3000" circular>
-        <block wx:for="{{hotItems}}" wx:key="id">
-            <swiper-item>
-                <image src="{{item.imageUrl}}" mode="aspectFill"></image>
-                <view class="hot-item-title">{{item.title}}</view>
-            </swiper-item>
-        </block>
-    </swiper>
-    <!-- 功能区 -->
-    <view class="function-area">
-        <text>这里是功能区，可添加具体功能</text>
+    <view class="navi-services-list">
+      <view class="navi-services-list-item">
+        <navigator open-type="navigate" hover-class="none" url="/miniprogram/pages/repairShow/index">
+          <image src="/image/index/my_submit.png"></image>
+        </navigator>
+        <text>我的发布</text>
+      </view>
+
+      <view class="navi-services-list-item" bindtap="formClick">
+        <view>
+          <image src=""></image>
+        </view>
+        <text>互帮互助</text>
+      </view>
+      <view class="navi-services-list-item" bindtap="storeClick">
+        <navigator hover-class="none" url="none">
+          <image src=""></image>
+        </navigator>
+        <text>社区商城</text>
+      </view>
+
     </view>
-    <bottom-tabbar></bottom-tabbar>
-</view>    
+  </view>
+  <!-- 底部导航栏 -->
+  <!-- bindnavigate="handleNavigate" -->
+  <bottom-tabbar navItems="{{bottomNavItems}}" ></bottom-tabbar>
+</view>

@@ -28,7 +28,7 @@ exports.main = async (event, context) => {
         phone,
         password,
         family_id,
-        createTime: db.serverDate()
+        create_time: db.serverDate()
       }
     })
     return {
