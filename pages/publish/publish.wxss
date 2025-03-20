@@ -1,0 +1,116 @@
+.publish-container {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.publish-type {
+  margin-bottom: 20px;
+}
+
+.picker-view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.input-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block; /* 让标题独占一行 */
+}
+
+.picker-view image {
+  width: 16px;
+  height: 16px;
+}
+
+ .publish-title-input {
+  display: flex;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  height: 40px; 
+}
+ 
+ 
+.publish-content-input {
+  display: flex;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  height: 120px; /* 新增高度属性，可根据需要调整数值 */
+  overflow-y: auto;
+}
+.publish-input input{
+  height: 100%; /* 让输入框撑满容器高度 */
+  width: 100%;
+
+}
+.publish-input textarea {
+  height: 100%; /* 让文本域撑满容器高度 */
+  width: 100%;
+  overflow-y: auto;
+}
+
+.publish-images {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.image-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+}
+
+.image-item image {
+  width: 100%;
+  height: 100%;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.add-image {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.add-image image {
+  width: 50px;
+  height: 50px;
+}
+
+.publish-button {
+  background-color: #007AFF;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
