@@ -2,7 +2,8 @@
   <!-- 社区公告 -->
   <view class="community-notice">
     <image src="/image/index/notice.png" class="notice-icon"></image>
-    <text>{{communityNotice}}</text>
+    <text wx:if="{{communityNotice}}">{{communityNotice}}</text>
+    <text wx:else>暂无公告</text>
   </view>
   <!-- 轮播图 -->
   <swiper class="swiper-container" indicator-dots autoplay interval="3000" circular>
