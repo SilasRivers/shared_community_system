@@ -84,7 +84,7 @@ Page({
       publishImages: images
     });
   },
-  publish() {
+  async publish() {
     const { publishTypes, selectedTypeIndex,selectedTypeId, publishTitle, publishContent, publishImages } = this.data;
     const publishType = publishTypes[selectedTypeIndex];
     if (!publishType) {
@@ -108,6 +108,10 @@ Page({
       });
       return;
     }
+
+    // 上传图片到云存储
+    const imageUrls = await this.uploadImages(publishImages);
+
     wx.cloud.callFunction({
       name: 'publish',  // 调用的云函数名称，需要与云函数实际名称一致
       data: {
@@ -115,7 +119,7 @@ Page({
         title: publishTitle,
         content: publishContent,
         family_id: 1,
-        images: publishImages,
+        images: imageUrls,
         status: false,
         createTime: new Date()  // 添加发布时间
       },
@@ -143,6 +147,24 @@ Page({
           icon: 'none'
         });
       }
-    })
+    });
+  },
+  async uploadImages(images) {
+    const imageUrls = [];
+    for (let i = 0; i < images.length; i++) {
+      const imagePath = images[i];
+      const cloudPath = `images/${Date.now()}-${i}-${Math.floor(Math.random() * 1000)}.png`;
+      try {
+        const uploadRes = await wx.cloud.uploadFile({
+          cloudPath,
+          filePath: imagePath
+        });
+        const fileID = uploadRes.fileID;
+        imageUrls.push(fileID);
+      } catch (error) {
+        console.error(`图片上传失败: ${error}`);
+      }
+    }
+    return imageUrls;
   }
 })
