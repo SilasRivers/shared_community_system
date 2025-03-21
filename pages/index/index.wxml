@@ -44,5 +44,6 @@
   </view>
   <!-- 底部导航栏 -->
   <!-- bindnavigate="handleNavigate" -->
-  <bottom-tabbar navItems="{{bottomNavItems}}" ></bottom-tabbar>
+  <!-- <bottom-tabbar navItems="{{bottomNavItems}}" ></bottom-tabbar> -->
+  <tabbar selected="{{selectedTabIndex}}"></tabbar>
 </view>

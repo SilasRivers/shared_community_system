@@ -1,0 +1,183 @@
+.page-container {
+  background-color: #fff;
+}
+
+.header {
+  height: 80rpx;
+  background-color: #ffd600;
+  display: flex;
+  align-items: center;
+  padding: 0 40rpx;
+}
+
+.back-btn image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.title {
+  flex: 1;
+  text-align: center;
+  font-size: 35rpx;
+  font-weight: bold;
+  color: #000;
+}
+
+.tab-scroll {
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  margin-bottom: 20rpx;
+  white-space: nowrap; /* 防止子元素换行 */
+  overflow-x: auto; /* 当内容超出时显示水平滚动条 */
+  -webkit-overflow-scrolling: touch; /* 让滚动更顺滑（针对 iOS 设备） */
+}
+
+.tab-item {
+  display: inline-block; /* 使元素在一行显示 */
+  margin: 0 10rpx; /* 调整元素之间的间距 */
+  font-size: 32rpx;
+  color: #333;
+  padding: 10rpx 20rpx; /* 给元素添加内边距，增强点击区域 */
+}
+
+.tab-active {
+  color: #ffd600;
+  font-weight: bold;
+  position: relative;
+}
+
+.tab-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2rpx;
+  width: 100%;
+  height: 4rpx;
+  background-color: #ffd600;
+}
+
+.content {
+  padding: 20rpx;
+}
+
+.no-data {
+  text-align: center;
+}
+
+.no-data-img {
+  width: 400rpx;
+  height: 400rpx;
+  margin: 0 auto 20rpx;
+}
+
+.no-data-text {
+  font-size: 34rpx;
+  margin-bottom: 10rpx;
+}
+
+.no-data-desc {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 30rpx;
+}
+
+.publish-btn {
+  padding: 16rpx 60rpx;
+  background-color: #ffd600;
+  color: #000;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  border: 1rpx solid #eee;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  height: 190rpx; /* 限定每个商品栏目的高度 */
+  overflow: hidden; /* 隐藏超出高度的内容 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 添加阴影效果 */
+}
+
+.item-cover {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+  object-fit: cover; /* 确保图片填充容器 */
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 使标题和描述在垂直方向上拉开距离 */
+}
+
+.item-title {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+  font-weight: bold; /* 加粗标题 */
+  margin-bottom: 8rpx;
+  line-height: 1.2; /* 调整行高，使标题更易读 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* 标题单行显示，超出部分用省略号表示 */
+}
+
+.item-description {
+  font-size: 28rpx;
+  color: #666;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4; /* 调整行高，使描述更易读 */
+}
+
+.price-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.suggest-price {
+  font-size: 30rpx;
+  color: #ff8c00;
+}
+
+.price-yuan {
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+.original-price {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.want-count {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.b-btn {
+  padding: 12rpx 24rpx;
+  border: 1rpx solid #ffd600;
+  color: #ffd600;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+}
