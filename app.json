@@ -3,10 +3,51 @@
   "pages": [
     "pages/login/login",
     "pages/register/register",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/publish/publish",
+    "pages/me/me",
+    "pages/items/items",
+    "pages/order/order"
   ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "登录"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/image/index.png",
+        "selectedIconPath": "/image/index_selected.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "社区",
+        "iconPath": "/image/community.png",
+        "selectedIconPath": "/image/community_selected.png"
+      },
+      {
+        "pagePath": "pages/publish/publish",
+        "text": "发布",
+        "iconPath": "/image/publish.png",
+        "selectedIconPath": "/image/publish_selected.png"
+      },
+      {
+        "pagePath": "pages/items/items",
+        "text": "闲置",
+        "iconPath": "/image/items.png",
+        "selectedIconPath": "/image/items_selected.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "/image/me.png",
+        "selectedIconPath": "/image/me_selected.png"
+      }
+    ]
   }
 }

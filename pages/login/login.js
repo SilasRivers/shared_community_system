@@ -87,9 +87,9 @@ Page({
             icon: 'success'
           })
           // 存储 token 到本地
-          wx.setStorageSync('token', res.result.token)
+          // wx.setStorageSync('token', res.result.token)
           // 跳转到首页
-          wx.navigateTo({
+          wx.switchTab({
             url: '/pages/index/index'
           })
         } else {

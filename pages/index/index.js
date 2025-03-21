@@ -17,7 +17,16 @@ Page({
         imageUrl: "/image/swiper/3.png",
         isActive: true
       }
-    ]
+    ],
+    selectedTabIndex: 0 // 初始选中的索引
+  },
+
+  onShow: function () {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: this.data.selectedTabIndex
+      });
+    }
   },
   // 页面初次加载时触发
   onLoad() {
