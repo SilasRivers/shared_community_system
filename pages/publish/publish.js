@@ -16,7 +16,8 @@ Page({
       success: res => {
         if (res.result.code===200) {
           this.setData({
-            publishTypes: res.result.data.data.map(item => item.type)
+            publishTypes: res.result.data.data
+            //.map(item => item.type)
           }, () => {
             // 在回调函数中查看更新后的值
             console.log('更新后的 publishTypes: ', this.data.publishTypes);
@@ -111,14 +112,14 @@ Page({
 
     // 上传图片到云存储
     const imageUrls = await this.uploadImages(publishImages);
-
+    const userInfo=wx.getStorageSync('token')
     wx.cloud.callFunction({
       name: 'publish',  // 调用的云函数名称，需要与云函数实际名称一致
       data: {
-        type: selectedTypeId,
+        type: publishTypes[selectedTypeIndex].id,
         title: publishTitle,
         content: publishContent,
-        family_id: 1,
+        family_id: userInfo.family_id,
         images: imageUrls,
         status: false,
         createTime: new Date()  // 添加发布时间
