@@ -105,3 +105,107 @@
   font-size: 26rpx;
 }
 /* 功能服务结束*/
+
+.goods-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column; /* 垂直排列图片和标题 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border-bottom: 1px solid #eee;
+}
+
+.goods-image {
+  width: 100%;
+  height: 200rpx;
+}
+.goods-item image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.goods-title {
+  padding: 15rpx;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.goods-info {
+  flex: 1;
+}
+
+.goods-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.goods-price {
+  font-size: 14px;
+  color: #f60;
+}
+
+.loading,
+.no-more {
+  text-align: center;
+  padding: 10px;
+  color: #999;
+}
+
+/* 商品列表区样式 */
+.goods-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+.goods-card {
+  position: relative;
+  border-radius: 15rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+.goods-card image {
+  width: 100%;
+  height: 200rpx;
+  display: block;
+}
+.goods-info {
+  padding: 15rpx;
+}
+.goods-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.goods-num {
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  background-color: #ff4d4f;
+  color: white;
+  padding: 4rpx 8rpx;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+}
+.no-more-tip {
+  text-align: center;
+  color: #999;
+  font-size: 24rpx;
+  padding: 30rpx 0;
+  width: 100%;
+  /* grid-column: 1 / 3; */
+  margin-top: auto; /* 推到底部 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 商品列表容器样式 */
+.goods-list-container {
+  display: flex;
+  flex-direction: column;
+}

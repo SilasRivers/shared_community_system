@@ -26,7 +26,6 @@
         </navigator>
         <text>我的发布</text>
       </view>
-
       <view class="navi-services-list-item" bindtap="formClick">
         <view>
           <image src=""></image>
@@ -39,8 +38,28 @@
         </navigator>
         <text>社区商城</text>
       </view>
-
     </view>
+  </view>
+  <!-- pages/goodsList/goodsList.wxml -->
+  <!-- 商品列表区 -->
+  <view class="goods-list-container">
+    <view class="goods-list">
+      <block wx:for="{{goodsList}}" wx:key="_id">
+        <view class="goods-item">
+          <!-- 图片在上 -->
+          <view class="goods-image">
+            <image src="{{item.images[0]}}" mode="aspectFill"></image>
+          </view>
+          <!-- 标题在下 -->
+          <view class="goods-title-box">
+            <text class="goods-title">{{item.title}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view wx:if="{{hasMore}}" class="loading">加载中...</view>
+    <view wx:if="{{!hasMore && goodsList.length > 0}}" class="no-more">没有更多商品了</view>
+
   </view>
   <!-- 底部导航栏 -->
   <!-- bindnavigate="handleNavigate" -->

@@ -3,29 +3,31 @@
   <view class="header">
     <view class="title">我发布的</view>
   </view>
-<!-- 分类标签栏 -->
-<scroll-view class="tab-scroll" scroll-x="true">
+  <!-- 分类标签栏 -->
+  <scroll-view class="tab-scroll" scroll-x="true">
     <view wx:for="{{tabList}}" wx:key="index" class="tab-item {{currentIdx === index? 'tab-active' : ''}}" bindtap="switchTab" data-index="{{index}}">
-        {{item}}
+      {{item}}
     </view>
-</scroll-view>
-<!-- 内容展示区域 -->
-<view class="content">
+  </scroll-view>
+  <!-- 内容展示区域 -->
+  <view class="content">
     <view wx:if="{{!contentList.length}}" class="no-data">
-        <image src="/image/item/empty.png" mode="aspectFit" class="no-data-img"></image>
-        <view class="no-data-text">你还没有发布宝贝呢</view>
-        <view class="no-data-desc">别人的世界花里胡哨，你的世界空空如也~</view>
-        <button class="publish-btn">发布宝贝</button>
+      <image src="/image/item/empty.png" mode="aspectFit" class="no-data-img"></image>
+      <view class="no-data-text">你还没有发布宝贝呢</view>
+      <view class="no-data-desc">别人的世界花里胡哨，你的世界空空如也~</view>
+      <button class="publish-btn">发布宝贝</button>
     </view>
     <view wx:else class="item-list">
-        <view class="item" wx:for="{{contentList}}" wx:key="_id">
-            <image src="{{item.images[0]}}" mode="aspectFill" class="item-cover"></image>
-            <view class="item-info">
-                <view class="item-title">主题：{{item.title}}</view>
-                <view class="item-description">描述：{{item.content}}</view>
-            </view>
+      <view class="item" wx:for="{{contentList}}" wx:key="_id" bind:tap="goToDetail" data-id="{{item._id}}">
+        <view class="message-image">
+          <image src="{{item.images[0]}}" mode="aspectFill" class="item-cover"></image>
         </view>
+        <view class="item-info">
+          <view class="item-title">主题：{{item.title}}</view>
+          <view class="item-description">描述：{{item.content}}</view>
+        </view>
+      </view>
     </view>
-</view>
+  </view>
   <!-- <bottom-tabbar navItems="{{bottomNavItems}}" ></bottom-tabbar> -->
 </view>
