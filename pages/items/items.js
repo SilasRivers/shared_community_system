@@ -39,5 +39,11 @@ Page({
               console.error('调用云函数失败', err);
           }
       });
-  }
+  },
+  goToDetail(e) {
+    const productId = e.currentTarget.dataset.id;
+    wx.navigateTo({
+        url: `/pages/detail/detail?id=${productId}`
+    });
+}
 });

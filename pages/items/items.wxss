@@ -145,6 +145,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
   line-height: 1.4; /* 调整行高，使描述更易读 */
 }
 
