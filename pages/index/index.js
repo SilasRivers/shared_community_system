@@ -24,7 +24,8 @@ Page({
     currentPage: 1,             // 当前页码
     pageSize: 10,        // 每页显示数量
     hasMore: true,        // 是否还有更多数据,
-    isLoading: false
+    isLoading: false,
+    watcher: null       //  用于监听页面变化
   },
 
   onShow: function () {
@@ -50,15 +51,39 @@ Page({
       }
     }),
       this.loadGoodsList();
+    this.startWatching();
+  },
+
+  onUnload() {
+    if (this.data.watcher) {
+      this.data.watcher.close();
+    }
+  },
+
+  startWatching() {
+    const db = wx.cloud.database();
+    const watcher = db.collection('demands').watch({
+      onChange: () => {
+        // 数据发生变化，重置状态并重新加载数据
+        this.setData({
+          currentPage: 1,
+          hasMore: true,
+          goodsList: []
+        });
+        this.loadGoodsList();
+      },
+      onError: (err) => {
+        console.error('监听数据变化出错:', err);
+      }
+    });
+    this.setData({ watcher });
   },
   async loadGoodsList() {
     const { currentPage, pageSize, hasMore, isLoading } = this.data;
-    if (!hasMore||isLoading) {
-      console.log("没有了")
+    if (!hasMore || isLoading) {
       return;
     }
     try {
-      console.log("进来了")
       this.setData({ isLoading: true });
       const res = await wx.cloud.callFunction({
         name: 'searchGoodsListByPage',
@@ -71,7 +96,7 @@ Page({
       const newHasMore = currentPage * pageSize < total;
       this.setData({
         goodsList: this.data.goodsList.concat(list),
-       currentPage:currentPage+1,
+        currentPage: currentPage + 1,
         hasMore: newHasMore,
         isLoading: false
       });
