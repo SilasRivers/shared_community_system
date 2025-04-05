@@ -15,7 +15,7 @@
       <image src="/image/item/empty.png" mode="aspectFit" class="no-data-img"></image>
       <view class="no-data-text">你还没有发布宝贝呢</view>
       <view class="no-data-desc">别人的世界花里胡哨，你的世界空空如也~</view>
-      <button class="publish-btn">发布宝贝</button>
+      <button class="publish-btn" bind:tap="goToPublish">发布宝贝</button>
     </view>
     <view wx:else class="item-list">
       <view class="item" wx:for="{{contentList}}" wx:key="_id" bind:tap="goToDetail" data-id="{{item._id}}">
