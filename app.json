@@ -7,12 +7,15 @@
     "pages/publish/publish",
     "pages/me/me",
     "pages/items/items",
-    "pages/order/order"
+    "pages/detail/detail",
+    "pages/community/community",
+    "pages/family/family"
   ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "登录"
   },
+  "onReachBottomDistance": 100,
   "tabBar": {
     "color": "#7A7E83",
     "selectedColor": "#3cc51f",
@@ -25,7 +28,7 @@
         "selectedIconPath": "/image/index_selected.png"
       },
       {
-        "pagePath": "pages/order/order",
+        "pagePath": "pages/community/community",
         "text": "社区",
         "iconPath": "/image/community.png",
         "selectedIconPath": "/image/community_selected.png"

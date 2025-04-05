@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "got": "^14.4.7",
     "wx-server-sdk": "^3.0.1"
   }
 }

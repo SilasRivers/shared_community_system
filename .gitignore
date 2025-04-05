@@ -1,0 +1,6 @@
+cloudfunctions/*/node_modules/
+cloudfunctions/*/config.json
+cloudfunctions/*/package-lock.json
+cloudfunctions/*/package.json
+node_modules/*
+image/*
