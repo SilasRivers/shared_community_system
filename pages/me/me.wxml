@@ -1,0 +1,41 @@
+<!--pages/items/items.wxml-->
+<view class="page-container">
+  <view class="my-container">
+    <!-- 顶部用户信息 -->
+    <view class="user-info">
+      <image class="user-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+      <view class="user-name">{{userInfo.nickName}}</view>
+    </view>
+
+    <!-- 数据统计模块 -->
+    <view class="data-statistics">
+      <view class="stat-item">
+        <text class="stat-label">我的闲置</text>
+        <text class="stat-value">{{itemCount}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">家庭成员</text>
+        <text class="stat-value">{{familyMemberCount}}</text>
+      </view>
+    </view>
+
+    <!-- 功能模块 -->
+    <view class="function-list">
+      <navigator class="function-item" url="{{'/pages/family/family?members=' + encodeURIComponent(JSON.stringify(familyMembersList))}}" open-type="navigate">
+        <!-- <view class="item-icon">👨👩👧👦</view> -->
+        <view class="item-text">家庭成员</view>
+      </navigator>
+      <view class="function-item" bindtap="contactCustomerService">
+        <!-- <view class="item-icon">📞</view> -->
+        <view class="item-text">联系客服</view>
+      </view>
+    </view>
+
+    <!-- 其他功能 -->
+    <view class="other-functions">
+      <navigator class="other-item" url="/pages/feedback/feedback">意见反馈</navigator>
+      <navigator class="other-item" url="/pages/about/about">关于我们</navigator>
+      <view class="other-item" bindtap="handleLogout">退出登录</view>
+    </view>
+  </view>
+</view>
