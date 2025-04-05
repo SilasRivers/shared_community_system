@@ -5,7 +5,7 @@
     <picker mode="selector" range="{{publishTypes}}" range-key="type" bindchange="onPublishTypeChange" value="{{selectedTypeIndex}}">
       <view class="picker-view">
         <text>{{publishTypes[selectedTypeIndex]? publishTypes[selectedTypeIndex].type: '请选择发布类型'}}</text>
-        <image src="/images/arrow-down.png" mode="aspectFit" />
+        <image src="/image/publish/down.png" mode="aspectFit" />
       </view>
     </picker>
   </view>
