@@ -1,0 +1,12 @@
+<view class="family-container">
+  <view class="title">家庭成员信息</view>
+  <view class="family-list">
+    <view class="family-member" wx:for="{{familyMembers}}" wx:key="_id">
+      <image class="member-avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+      <view class="member-info">
+        <text class="member-name">{{item.username}}</text>
+      </view>
+    </view>
+    <view class="no-data-tip" wx:if="{{!familyMembers.length}}">暂无家庭成员信息</view>
+  </view>
+</view>
