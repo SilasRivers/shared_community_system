@@ -45,5 +45,10 @@ Page({
     wx.navigateTo({
         url: `/pages/detail/detail?id=${productId}`
     });
-}
+  },
+  goToPublish(e){
+    wx.switchTab({
+      url: '/pages/publish/publish',
+    })
+  }
 });

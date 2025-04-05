@@ -209,3 +209,57 @@
   display: flex;
   flex-direction: column;
 }
+.tag-item {
+  color: yellow;
+  text-align: center;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  /* background-color: #eee; */
+}
+
+.function-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+
+.button.active {
+  background-color: #2196f3; /* 选中时背景颜色 */
+}
+.tab-container {
+  margin-bottom: 20rpx;
+  position: relative; /* 新增，为动画做准备 */
+}
+.tab-scroll {
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  white-space: nowrap; 
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch; 
+  transition: width 0.3s ease; /* 新增过渡动画，让展开更流畅 */
+}
+.tab-item {
+  display: inline-block;
+  margin: 0 10rpx;
+  font-size: 32rpx;
+  color: #333;
+  padding: 10rpx 20rpx;
+}
+.tab-active {
+  color: #ffd600;
+  font-weight: bold;
+  position: relative;
+}
+.more-button {
+  color: #333;
+  cursor: pointer;
+}

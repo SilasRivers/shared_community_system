@@ -14,41 +14,27 @@
     </block>
   </swiper>
   <!-- 功能区 -->
-  <view class="navi-services">
-    <view class="navi-services-title">
-      <view class="navi-services-title-left">功能服务</view>
-      <view class="navi-services-title-right">更多</view>
-    </view>
-    <view class="navi-services-list">
-      <view class="navi-services-list-item">
-        <navigator open-type="navigate" hover-class="none" url="/miniprogram/pages/repairShow/index">
-          <image src="/image/index/my_submit.png"></image>
-        </navigator>
-        <text>我的发布</text>
+  <!-- 顶部发布类型按钮区域 -->
+   <!-- 分类标签栏 -->
+   <view class="tab-container">
+    <scroll-view class="tab-scroll" scroll-x="true">
+      <view wx:for="{{visiblePublishTypes}}" wx:key="index" class="tab-item {{selectedTypeIndex === index? 'tab-active' : ''}}" bindtap="filterPostsByType" data-index="{{index}}">
+        <text>{{item.type}}</text>
       </view>
-      <view class="navi-services-list-item" bindtap="formClick">
-        <view>
-          <image src=""></image>
-        </view>
-        <text>互帮互助</text>
-      </view>
-      <view class="navi-services-list-item" bindtap="storeClick">
-        <navigator hover-class="none" url="none">
-          <image src=""></image>
-        </navigator>
-        <text>社区商城</text>
-      </view>
-    </view>
+      <view wx:if="{{hasMoreTypes}}" class="tab-item more-button" bindtap="showMoreTypes">更多</view>
+    </scroll-view>
   </view>
+
   <!-- pages/goodsList/goodsList.wxml -->
   <!-- 商品列表区 -->
   <view class="goods-list-container">
     <view class="goods-list">
-      <block wx:for="{{goodsList}}" wx:key="_id">
+      <block wx:for="{{goodsList}}" wx:key="_id" bind:tap="goToDetail" data-id="{{item._id}}">
         <view class="goods-item">
           <!-- 图片在上 -->
           <view class="goods-image">
-            <image src="{{item.images[0]}}" mode="aspectFill"></image>
+            <image wx:if="{{item.images && item.images.length > 0 && item.images[0]}}" src="{{item.images[0]}}" mode="aspectFill"/>
+  <image wx:else src="/image/index/unknown.png" mode="aspectFill"/>
           </view>
           <!-- 标题在下 -->
           <view class="goods-title-box">
@@ -57,8 +43,8 @@
         </view>
       </block>
     </view>
-    <view wx:if="{{hasMore}}" class="loading">加载中...</view>
-    <view wx:if="{{!hasMore && goodsList.length > 0}}" class="no-more">没有更多商品了</view>
+    <!-- <view wx:if="{{hasMore}}" class="loading">加载中...</view> -->
+    <!-- <view wx:if="{{!hasMore && goodsList.length > 0}}" class="no-more">没有更多商品了</view> -->
 
   </view>
   <!-- 底部导航栏 -->
