@@ -8,15 +8,15 @@
     </block>
   </swiper>
   <!-- 商品分类标签 -->
-  <view class="category-tag">{{item.type}}</view>
+  <text>标签：</text><view class="category-tag">{{item.type}}</view>
   <!-- 商品标题 -->
   <view class="detail-title">{{item.title}}</view>
   <!-- 商品描述 -->
-  <view class="detail-description">{{item.description}}</view>
+  <view class="detail-description">{{item.content}}</view>
   <!-- 发布人信息 -->
   <view class="publisher-info">
     <image src="{{item.publisherAvatar}}" class="avatar" mode="aspectFill"></image>
-    <view class="family-name">所属家庭：{{item.family_name}}</view>
+    <view class="family-name">家庭住址：{{item.family_id}}</view>
   </view>
   <!-- 其他商品信息 -->
   <view class="detail-info">
@@ -25,6 +25,7 @@
       <text class="info-value">{{item.create_time}}</text>
     </view>
   </view>
+
   <!-- 帮助按钮 -->
   <button class="help-btn" bindtap="handleHelp">
     <image src="/images/help-icon.png" mode="aspectFit" />

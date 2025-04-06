@@ -28,7 +28,7 @@ Page({
           name: 'searchOrder',
           data: {
               status: status,
-              family_id: 1
+              family_id: wx.getStorageSync('token').family_id
           },
           success: res => {
               this.setData({

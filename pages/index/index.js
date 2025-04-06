@@ -1,24 +1,7 @@
 Page({
   data: {
     communityNotice: null,
-    hotItems: [
-      {
-        id: 1,
-        imageUrl: "/image/swiper/1.png",
-        isActive: true
-      },
-      {
-        id: 2,
-        imageUrl: "/image/swiper/2.png",
-        isActive: true
-      },
-      {
-        id: 3,
-        imageUrl: "/image/swiper/3.png",
-        isActive: true
-      },
-
-    ],
+    hotItems: [],
     showOtherCommunity: false,
     visiblePublishTypes: [],
     allPublishTypes: [],
@@ -50,13 +33,25 @@ Page({
     this.fetchPublishTypes();
     this.loadGoodsList();
     // this.startWatching();
-
+    this.loadSwiper();
   },
 
   onUnload() {
     if (this.data.watcher) {
       this.data.watcher.close();
     }
+  },
+  async loadSwiper(){
+    wx.cloud.callFunction({
+      name:'getSwiper',
+      success:res=>{
+        if(res.result.code==200){
+          this.setData({
+            hotItems: res.result.data.data
+          })
+        }
+      }
+    })
   },
   async loadNotice() {
     wx.cloud.callFunction({

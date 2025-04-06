@@ -12,10 +12,12 @@ exports.main = async (event, context) => {
     const { id } = event
     // 从数据库中查询对应 id 的商品信息
     const res = await db.collection('demands').doc(id).get()
-    const publishTypeRes = await db.collection('family').where({
-      id: res.data.family_id}).get()
+    const publishTypeRes = await db.collection('publish_type')
+                .where({
+                    id: res.data.type
+                }).get()
     // 返回查询到的商品信息
-    res.data.family_name=publishTypeRes.data[0].family_name
+    res.data.type=publishTypeRes.data[0].type
     return {
         data: res.data,
     }

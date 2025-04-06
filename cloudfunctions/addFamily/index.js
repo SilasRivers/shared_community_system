@@ -5,13 +5,12 @@ cloud.init({
 })
 const db = cloud.database()
 exports.main = async (event, context) => {
-  const { family_id, family_name, family_address } = event
+  const { family_id, family_name } = event
   try {
     const res = await db.collection('family').add({
       data: {
         family_id,
-        family_name,
-        family_address
+        family_name
       }
     })
     return {
