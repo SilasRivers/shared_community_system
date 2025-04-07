@@ -1,0 +1,49 @@
+<view class="community-container">
+  <view class="post-list">
+    <view class="post-item" wx:for="{{posts}}" wx:key="_id" bindtap="goToPostDetail" data-post="{{item}}">
+      <view class="post-header">
+        <view class="author-info">
+          <image class="avatar" src="{{item.avatarUrl}}"></image>
+          <text class="author-name">{{item.name}}</text>
+        </view>
+        <text class="post-time">{{item.postTime}}</text>
+      </view>
+      <view class="post-content">
+        <text>{{item.content}}</text>
+      </view>
+      <view class="post-interaction">
+        <view class="like" catchtap="handleLike" data-postid="{{item._id}}">
+          <image class="icon" src="{{item.isLiked? '/image/community/like.png' : '/image/community/like.png'}}"></image>
+          <text>{{item.likeNum}}</text>
+        </view>
+        <view class="comment" catchtap="handleComment" data-postid="{{item._id}}">
+          <image class="icon" src="/image/community/comment.png"></image>
+          <text>{{item.commentNum}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="loading" wx:if="{{isLoading && hasMore}}">加载中...</view>
+    <view class="no-more" wx:if="{{!hasMore &&!isLoading}}">没有更多内容了</view>
+  </view>
+  <view class="add-post-btn" bindtap="goToAddPostPage">
+    + 发布新帖子
+  </view>
+</view>
+<!-- 评论弹窗 -->
+<view class="comment-popup backdrop" wx:if="{{showCommentPopup}}" bindtap="closeCommentPopup">
+  <view class="comment-popup-content"  >
+    <view class="popup-header">
+      <text class="popup-title">发表评论</text>
+      <text class="close-btn" bindtap="closeCommentPopup">×</text>
+    </view>
+    <textarea class="comment-input" placeholder="请输入评论内容" bindinput="handleCommentInput" catchtap maxlength="{{maxCommentLength}}" auto-height>
+      <!-- bindfocus="preventPopupClose" bindblur="allowPopupClose" -->
+    </textarea>
+    <view class="remaining-chars">
+      还可输入 {{maxCommentLength - commentContent.length}} 字
+    </view>
+    <view class="comment-submit-btn" bindtap="submitComment">
+      提交评论
+    </view>
+  </view>
+</view>

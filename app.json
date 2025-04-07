@@ -9,7 +9,9 @@
     "pages/items/items",
     "pages/detail/detail",
     "pages/community/community",
-    "pages/family/family"
+    "pages/family/family",
+    "pages/addPostPage/addPostPage",
+    "pages/postDetail/postDetail"
   ],
   "window": {
     "navigationBarTextStyle": "white",

@@ -1,0 +1,14 @@
+<view class="add-post-container">
+  <view class="post-form">
+    <textarea class="post-content-input" placeholder="请输入帖子内容" bindinput="handleContentInput"></textarea>
+    <!-- <view class="image-upload" wx:if="{{!imageUrl}}">
+      <text>上传图片</text>
+      <button bindtap="chooseImage">选择图片</button>
+    </view>
+    <view class="image-preview" wx:if="{{imageUrl}}">
+      <image src="{{imageUrl}}" mode="aspectFill"></image>
+      <button bindtap="removeImage">移除图片</button>
+    </view> -->
+    <view class="submit-btn" bindtap="submitPost">发布</view>
+  </view>
+</view>

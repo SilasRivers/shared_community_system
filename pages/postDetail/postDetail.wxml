@@ -1,0 +1,23 @@
+<view class="post-detail-container">
+  <view class="post-header">
+    <view class="author-info">
+      <image class="avatar" src="{{post.avatarUrl}}"></image>
+      <text class="author-name">{{post.name}}</text>
+    </view>
+    <text class="post-time">{{post.postTime}}</text>
+  </view>
+  <view class="post-content">
+    <text>{{post.content}}</text>
+  </view>
+  <view class="comment-list">
+  <view>所有评论</view>
+    <view class="comment-item" wx:for="{{comments}}" wx:key="_id">
+      <view class="comment-author-info">
+        <image class="comment-avatar" src="{{item.avatarUrl}}"></image>
+        <text class="comment-author-name">{{item.username}}</text>
+      </view>
+      <text class="comment-content">{{item.content}}</text>
+      <text class="comment-time">{{item.commentTime}}</text>
+    </view>
+  </view>
+</view>    
