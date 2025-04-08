@@ -14,7 +14,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getPublishTypes',
       success: res => {
-        if (res.result.code===200) {
+        if (res.result.code === 200) {
           this.setData({
             publishTypes: res.result.data.data
             //.map(item => item.type)
@@ -86,7 +86,7 @@ Page({
     });
   },
   async publish() {
-    const { publishTypes, selectedTypeIndex,selectedTypeId, publishTitle, publishContent, publishImages } = this.data;
+    const { publishTypes, selectedTypeIndex, selectedTypeId, publishTitle, publishContent, publishImages } = this.data;
     const publishType = publishTypes[selectedTypeIndex];
     if (!publishType) {
       wx.showToast({
@@ -112,7 +112,7 @@ Page({
 
     // 上传图片到云存储
     const imageUrls = await this.uploadImages(publishImages);
-    const userInfo=wx.getStorageSync('token')
+    const userInfo = wx.getStorageSync('token')
     wx.cloud.callFunction({
       name: 'publish',  // 调用的云函数名称，需要与云函数实际名称一致
       data: {
@@ -131,9 +131,20 @@ Page({
             icon: 'success'
           });
           console.log("发布成功")
-          wx.navigateTo({
-            url: '/pages/index/index',
-          })
+          // 清空发布标题和内容
+          this.setData({
+            publishTitle: '',
+            publishContent: '',
+            publishImages: []
+          }, () => {
+            // 页面更新完成后返回上一页
+            wx.navigateBack({
+              delta: 1
+            });
+          });
+          // wx.navigateTo({
+          //   url: '/pages/index/index',
+          // })
         } else {
           wx.showToast({
             title: '发布失败',

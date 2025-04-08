@@ -12,12 +12,12 @@
   <!-- 发布标题输入 -->
   <view class="publish-title-input">
     <view class="input-label">标题：</view>
-    <input type="text" placeholder="请输入发布标题" bindinput="handleTitleInput" bindfocus="handleFocus" bindblur="handleBlur" value="{{inputTitleValue}}" />
+    <input type="text" placeholder="请输入发布标题" bindinput="handleTitleInput" bindfocus="handleFocus" bindblur="handleBlur" value="{{publishTitle}}" />
   </view>
   <!-- 发布内容输入 -->
   <view class="publish-content-input">
     <view class="input-label">内容：</view>
-    <textarea placeholder="请输入发布内容" bindinput="handleContentInput"></textarea>
+    <textarea placeholder="请输入发布内容" bindinput="handleContentInput" value="{{publishContent}}"></textarea>
   </view>
   <!-- 发布图片选择 -->
   <view class="publish-images">
