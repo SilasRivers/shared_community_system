@@ -29,8 +29,8 @@
   <!-- 商品列表区 -->
   <view class="goods-list-container">
     <view class="goods-list">
-      <block wx:for="{{goodsList}}" wx:key="_id" bind:tap="goToDetail" data-id="{{item._id}}">
-        <view class="goods-item">
+      <block wx:for="{{goodsList}}" >
+        <view class="goods-item" wx:key="_id" bind:tap="goToDetail" data-id="{{item._id}}">
           <!-- 图片在上 -->
           <view class="goods-image">
             <image wx:if="{{item.images && item.images.length > 0 && item.images[0]}}" src="{{item.images[0]}}" mode="aspectFill"/>

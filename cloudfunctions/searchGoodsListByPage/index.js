@@ -5,16 +5,22 @@ cloud.init({
 })
 const db = cloud.database()
 exports.main = async (event, context) => {
-  const { page = 1, pageSize = 10 } = event;
+  const { page = 1, pageSize = 10, publishType } = event;
   const skipCount = (page - 1) * pageSize;
 
   try {
-    const goodsList = await db.collection('demands')
+    let query = await db.collection('demands')
       .where({ 'status': false })
       .orderBy('create_time', 'desc')
       .skip(skipCount)
-      .limit(pageSize)
-      .get();
+      .limit(pageSize);
+    // 如果有 publishType 参数，添加筛选条件
+    if (publishType) {
+      query = query.where({
+        type: publishType
+      });
+    }
+    const goodsList = await query.get();
     // 获取总数据量
     const totalRes = await db.collection('demands').count();
     const total = totalRes.total;

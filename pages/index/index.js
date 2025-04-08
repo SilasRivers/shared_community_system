@@ -13,7 +13,7 @@ Page({
     originalWidth: null, // 新增，记录滚动视图初始宽度
     // 商品加载
     goodsList: [],       // 商品列表数据
-    currentPage: 1,             // 当前页码
+    page: 1,             // 当前页码
     pageSize: 10,        // 每页显示数量
     hasMore: true,        // 是否还有更多数据,
     isLoading: false,
@@ -41,11 +41,11 @@ Page({
       this.data.watcher.close();
     }
   },
-  async loadSwiper(){
+  async loadSwiper() {
     wx.cloud.callFunction({
-      name:'getSwiper',
-      success:res=>{
-        if(res.result.code==200){
+      name: 'getSwiper',
+      success: res => {
+        if (res.result.code == 200) {
           this.setData({
             hotItems: res.result.data.data
           })
@@ -87,15 +87,19 @@ Page({
     this.setData({ watcher });
   },
   async loadGoodsList() {
+    const { page, pageSize, goodsList, selectedTypeId } = this.data
     try {
       const res = await wx.cloud.callFunction({
-        name: 'searchGoodList',
+        name: 'searchGoodsListByPage',
         data: {
-          publishType: this.data.selectedTypeId
+          publishType: selectedTypeId,
+          page: page,
+          pageSize: pageSize
         }
       });
       this.setData({
-        goodsList: res.result.data
+        goodsList: [...goodsList, ...res.result.list],
+        page: page + 1
       });
     } catch (error) {
       console.error('加载商品列表失败:', error);
@@ -129,7 +133,9 @@ Page({
     const selectedTypeId = this.data.allPublishTypes[index].id;
     this.setData({
       selectedTypeIndex: index,
-      selectedTypeId: selectedTypeId
+      selectedTypeId: selectedTypeId,
+      goodsList: [],
+      page: 1
     }, () => {
       const query = wx.createSelectorQuery();
       query.select('.tab-scroll').boundingClientRect((rect) => {
@@ -188,7 +194,7 @@ Page({
   },
   // 滚动到底部触发加载
   onReachBottom() {
-  this.loadGoodsList();
-}
+    this.loadGoodsList();
+  }
 
 });    
