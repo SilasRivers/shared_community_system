@@ -9,11 +9,6 @@ Page({
     });
   },
 
-  removeImage: function () {
-    this.setData({
-      imageUrl: ''
-    });
-  },
   submitPost: function () {
     const { content } = this.data;
     if (content.trim() === '') {
@@ -43,7 +38,21 @@ Page({
             title: '发布成功',
             icon: 'success'
           });
-          wx.navigateBack({});
+          const pages = getCurrentPages();
+          const prevPage = pages[pages.length - 2]; // 获取上一个页面（即 community 页面）
+          if (prevPage) {
+            prevPage.setData({
+              page: 1
+            })
+            // 调用 community 页面的重新加载数据方法
+            if (typeof prevPage.loadPosts === 'function') {
+              prevPage.loadPosts();
+            }
+            // 返回上一个页面
+            wx.navigateBack({
+              delta: 1
+            });
+          }
         } else {
           wx.showToast({
             title: '发布失败',

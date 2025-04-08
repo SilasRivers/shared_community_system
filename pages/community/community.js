@@ -5,6 +5,7 @@ Page({
     pageSize: 10,
     isLoading: false,
     hasMore: true,
+    // needRefreshAfterPublish: false,
     showCommentPopup: false,
     currentPostId: '',
     commentContent: '',
@@ -46,10 +47,25 @@ Page({
       observer.close();
     }
   },
+  onPullDownRefresh() {
+    // 下拉刷新时调用 reloadData 方法
+    this.reloadData();
+    // 停止下拉刷新动画
+    wx.stopPullDownRefresh();
+  },
+  reloadData() {
+    this.setData({
+      needRefreshAfterPublish: true // 设置标识位为true
+    });
+    this.loadPosts();
+  },
   loadPosts: function () {
-    const { page, pageSize, isLoading, hasMore } = this.data;
-    if (isLoading || !hasMore) return;
-    this.setData({ isLoading: true });
+    const { page, pageSize, isLoading, hasMore, needRefreshAfterPublish } = this.data;
+    if (!hasMore) {// 如果或没有更多了并且不是发布后刷新的，直接返回
+      return;
+    }
+    // if (isLoading || !hasMore) return;
+    this.setData({ isLoading: true, needRefreshAfterPublish: false });
     wx.cloud.callFunction({
       name: 'getPosts',
       data: {
@@ -139,7 +155,7 @@ Page({
       });
       return;
     }
-    const userInfo=wx.getStorageSync('token')
+    const userInfo = wx.getStorageSync('token')
     wx.cloud.callFunction({
       name: 'commentPost',
       data: {
