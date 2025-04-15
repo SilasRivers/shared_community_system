@@ -10,16 +10,16 @@ exports.main = async (event, context) => {
 
   try {
     let query = await db.collection('demands')
-      .where({ 'status': false })
+      .where({ status: false, type: publishType })
       .orderBy('create_time', 'desc')
       .skip(skipCount)
       .limit(pageSize);
     // 如果有 publishType 参数，添加筛选条件
-    if (publishType) {
-      query = query.where({
-        type: publishType
-      });
-    }
+    // if (publishType) {
+    //   query = query.where({
+    //     type: publishType
+    //   });
+    // }
     const goodsList = await query.get();
     // 获取总数据量
     const totalRes = await db.collection('demands').count();

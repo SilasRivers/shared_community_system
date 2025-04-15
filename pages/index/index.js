@@ -61,7 +61,6 @@ Page({
           this.setData({
             communityNotice: res.result.data.res
           })
-          console.log(communityNotice)
         }
       }, fail: err => {
         console.error('调用云函数失败', err)
@@ -97,6 +96,12 @@ Page({
           pageSize: pageSize
         }
       });
+      if (res.result.list < pageSize) {
+        // 如果获取到的商品数量小于 pageSize，说明没有更多商品了
+        this.setData({
+          hasMore: false
+        });
+      }
       this.setData({
         goodsList: [...goodsList, ...res.result.list],
         page: page + 1
