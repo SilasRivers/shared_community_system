@@ -1,15 +1,35 @@
 Page({
   data: {
     userInfo: {
-      avatarUrl: 'https://c-ssl.duitang.com/uploads/item/201903/15/20190315222520_i48yn.jpeg', // 替换为真实头像地址
-      nickName: '用户昵称'
+      avatarUrl: '', // 替换为真实头像地址
+      username: ''
     },
     itemCount: 0, // 我的闲置数量
     familyMemberCount: 0, // 家庭成员数量
     familyMembersList: []
   },
+  handleJump() {
+    const url = '/pages/family/family?members=' + encodeURIComponent(JSON.stringify(this.data.familyMembersList));
+    // console.log('传递的 url:', url);
+    // 使用 wx.navigateTo 进行跳转
+    wx.navigateTo({
+      url: url,
+      success: function () {
+        console.log('页面跳转成功');
+      },
+      fail: function (err) {
+        console.error('页面跳转失败:', err);
+      }
+    });
+  },
   onLoad() {
-    const family_id = wx.getStorageSync('token').family_id;
+    const userToken = wx.getStorageSync('token')
+    this.setData({
+      'userInfo.avatarUrl': userToken.avatarUrl,
+      'userInfo.username': userToken.username
+    })
+
+    const family_id = userToken.family_id;
     if (family_id) {
       wx.cloud.callFunction({
         name: 'getFamilyMembers',
@@ -33,6 +53,7 @@ Page({
     } else {
       console.error('未获取到用户 ID');
     }
+
   },
   // 联系客服
   contactCustomerService() {

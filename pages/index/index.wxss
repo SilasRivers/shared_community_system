@@ -263,3 +263,20 @@
   color: #333;
   cursor: pointer;
 }
+/* 没有更多商品时显示的文本 */
+.no-more-text {
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  padding: 10px 0;
+  width: 100%;
+  display: block; /* 使其成为块级元素，独占一行 */
+}/* 没有更多商品时显示的文本 */
+.no-more-text {
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  padding: 10px 0;
+  width: 100%;
+  display: block; /* 使其成为块级元素，独占一行 */
+}

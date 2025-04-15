@@ -13,13 +13,16 @@ exports.main = async (event, context) => {
     // 从数据库中查询对应 id 的商品信息
     const res = await db.collection('demands').doc(id).get()
     const publishTypeRes = await db.collection('publish_type')
-                .where({
-                    id: res.data.type
-                }).get()
+      .where({
+        id: res.data.type
+      }).get()
+    const userRes = await db.collection('user').doc(res.data.user_id).get()
     // 返回查询到的商品信息
-    res.data.type=publishTypeRes.data[0].type
+    res.data.type = publishTypeRes.data[0].type
+    res.data.avatarUrl = userRes.data.avatarUrl
+    res.data.username = userRes.data.username
     return {
-        data: res.data,
+      data: res.data,
     }
   } catch (e) {
     // 若查询过程中出现错误，打印错误信息并返回 null

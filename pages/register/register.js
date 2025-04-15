@@ -6,7 +6,9 @@ Page({
     password: '',
     confirmPassword: '',
     family_id: '',
-    isPasswordMismatch: false
+    isPhoneValid: false,
+    isPasswordMismatch: false,
+    avatarUrl: ''
   },
   onUsernameInput(e) {
     this.setData({
@@ -14,8 +16,12 @@ Page({
     })
   },
   onPhoneNumberInput(e) {
+    const phoneReg = /^1[3-9]\d{9}$/;
+    const phone = e.detail.value;
+    const isPhoneValid = phoneReg.test(phone);
     this.setData({
-      phone: e.detail.value
+      phone,
+      isPhoneValid
     })
   },
   onPasswordInput(e) {
@@ -43,7 +49,8 @@ Page({
       password,
       confirmPassword,
       family_id,
-      isPasswordMismatch
+      isPasswordMismatch,
+      isPhoneValid
     } = this.data
     if (!username || !phone || !password || !confirmPassword || !family_id) {
       wx.showToast({
@@ -51,6 +58,14 @@ Page({
         icon: 'none'
       })
       return
+    }
+    if (!isPhoneValid) {
+      // 手机号码不合法，给出提示
+      wx.showToast({
+        title: '请输入正确的手机号码',
+        icon: 'none'
+      });
+      return;
     }
     if (isPasswordMismatch) {
       wx.showToast({
@@ -116,44 +131,76 @@ Page({
       }
     })
   },
-  registerUser() {
+  async registerUser() {
     const { username, phone, password, family_id } = this.data
     wx.cloud.callFunction({
-      name: 'registerUser',
-      data: {
-        username,
-        phone,
-        password,
-        family_id
-      },
-      success: regRes => {
-        if (regRes.result.code === 200) {
-          wx.showToast({
-            title: '注册成功',
-            icon: 'success'
-          })
-          wx.navigateTo({
-            url: '/pages/login/login'
-          })
-        } else if (regRes.result.code === 400) {
-          wx.showToast({
-            title: regRes.result.message,
-            icon: 'none'
+      name: 'generateRandomAvatar',
+      success: res => {
+        if (res.result.success) {
+          wx.cloud.callFunction({
+            name: 'registerUser',
+            data: {
+              username,
+              phone,
+              password,
+              family_id,
+              avatarUrl: res.result.avatarUrl
+            },
+            success: regRes => {
+              if (regRes.result.code === 200) {
+                wx.showToast({
+                  title: '注册成功',
+                  icon: 'success'
+                })
+                wx.navigateBack()
+              } else if (regRes.result.code === 400) {
+                wx.showToast({
+                  title: regRes.result.message,
+                  icon: 'none'
+                })
+              } else {
+                wx.showToast({
+                  title: '注册失败',
+                  icon: 'none'
+                })
+              }
+            },
+            fail: regErr => {
+              console.error('注册调用云函数失败：', regErr)
+              wx.showToast({
+                title: '注册失败',
+                icon: 'none'
+              })
+            }
           })
         } else {
           wx.showToast({
-            title: '注册失败',
+            title: res.result.error,
             icon: 'none'
-          })
+          });
         }
       },
-      fail: regErr => {
-        console.error('注册调用云函数失败：', regErr)
+      fail: err => {
+        console.error('调用云函数失败:', err);
         wx.showToast({
-          title: '注册失败',
+          title: '调用云函数失败',
           icon: 'none'
-        })
+        });
       }
-    })
+    });
+  },
+  async uploadFile(image) {
+    const cloudPath = `avators/${Date.now()}-${Math.floor(Math.random() * 1000)}.png`;
+    wx.cloud.uploadFile({
+      cloudPath,
+      filePath: image,
+      success: res => {
+        console.log('上传成功', res.fileID);
+        return res.fileID
+      },
+      fail: err => {
+        console.error('上传失败', err);
+      }
+    });
   }
 })

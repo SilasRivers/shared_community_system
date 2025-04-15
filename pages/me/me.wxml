@@ -4,7 +4,7 @@
     <!-- 顶部用户信息 -->
     <view class="user-info">
       <image class="user-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
-      <view class="user-name">{{userInfo.nickName}}</view>
+      <view class="user-name">{{userInfo.username}}</view>
     </view>
 
     <!-- 数据统计模块 -->
@@ -21,7 +21,7 @@
 
     <!-- 功能模块 -->
     <view class="function-list">
-      <navigator class="function-item" url="{{'/pages/family/family?members=' + encodeURIComponent(JSON.stringify(familyMembersList))}}" open-type="navigate">
+      <navigator class="function-item" bind:tap="handleJump">
         <!-- <view class="item-icon">👨👩👧👦</view> -->
         <view class="item-text">家庭成员</view>
       </navigator>

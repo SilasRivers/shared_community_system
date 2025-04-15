@@ -42,7 +42,10 @@
           </view>
         </view>
       </block>
+      <!-- 没有更多商品时显示的文本 -->
+    
     </view>
+    <view wx:if="{{!hasMore}}" class="no-more-text">没有更多了</view>
     <!-- <view wx:if="{{hasMore}}" class="loading">加载中...</view> -->
     <!-- <view wx:if="{{!hasMore && goodsList.length > 0}}" class="no-more">没有更多商品了</view> -->
 

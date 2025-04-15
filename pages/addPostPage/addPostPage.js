@@ -24,7 +24,8 @@ Page({
       data: {
         postData: {
           userId: userInfo._id,
-          name: userInfo.username,
+          username: userInfo.username,
+          avatarUrl: userInfo.avatarUrl,
           content,
           postTime: new Date(),
           likeNum: 0,

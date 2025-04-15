@@ -14,21 +14,21 @@
   <!-- 商品描述 -->
   <view class="detail-description">{{item.content}}</view>
   <!-- 发布人信息 -->
-  <view class="publisher-info">
-    <image src="{{item.publisherAvatar}}" class="avatar" mode="aspectFill"></image>
-    <view class="family-name">家庭住址：{{item.family_id}}</view>
-  </view>
-  <!-- 其他商品信息 -->
-  <view class="detail-info">
-    <view class="info-item">
-      <text class="info-label">上架时间:</text>
-      <text class="info-value">{{item.create_time}}</text>
+  <view class="publisher-info-container">
+    <view class="publisher-info-left">
+      <image src="{{item.avatarUrl}}" class="avatar" mode="aspectFill"></image>
+      <view class="publisher-name">{{item.username}}</view>
+    </view>
+    <view class="publisher-info-right">
+      <view class="family-name">家庭住址：{{item.family_id}}</view>
+      <view class="publish-time">发布时间:{{item.create_time}}</view>
     </view>
   </view>
-
   <!-- 帮助按钮 -->
-  <button class="help-btn" bindtap="handleHelp">
-    <image src="/images/help-icon.png" mode="aspectFit" />
+  <button wx:if="{{flag!=1}}" class="help-btn" bindtap="handleHelp">
     <text>帮助</text>
+  </button>
+  <button wx:elif="{{flag==1&&del==0}}" class="help-btn" bindtap="handleHelp">
+    <text>编辑</text>
   </button>
 </view>

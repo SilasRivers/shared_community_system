@@ -10,7 +10,8 @@ exports.main = async (event, context) => {
     username,
     phone,
     password,
-    family_id
+    family_id,
+    avatarUrl
   } = event
   try {
     const isRepeatReg = await db.collection('user').where({
@@ -28,6 +29,7 @@ exports.main = async (event, context) => {
         phone,
         password,
         family_id,
+        avatarUrl,
         create_time: db.serverDate()
       }
     })
