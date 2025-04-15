@@ -12,6 +12,7 @@ exports.main = async (event, context) => {
     content,
     family_id,
     images,
+    user_id,
     status
   } = event
   const res = await db.collection('demands').add({
@@ -20,8 +21,10 @@ exports.main = async (event, context) => {
       title,
       content,
       family_id,
+      user_id,
       images,
       status,
+      target_user_id: '',
       create_time: db.serverDate()
     }
   })

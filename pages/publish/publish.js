@@ -122,6 +122,7 @@ Page({
         family_id: userInfo.family_id,
         images: imageUrls,
         status: false,
+        user_id: userInfo._id,
         createTime: new Date()  // 添加发布时间
       },
       success: res => {
