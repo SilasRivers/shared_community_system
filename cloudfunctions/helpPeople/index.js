@@ -13,7 +13,8 @@ exports.main = async (event, context) => {
     const res = await db.collection('demands').doc(id).update({
       data: {
         status: true,
-        target_user_id: user_id
+        target_user_id: user_id,
+        help_time: db.serverDate()
       }
     });
     return res.stats.updated > 0;

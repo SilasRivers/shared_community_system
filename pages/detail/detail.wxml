@@ -1,4 +1,5 @@
 <view class="detail-page">
+  <!-- 商品展示区域 -->
   <!-- 轮播图 -->
   <swiper class="detail-swiper" indicator-dots autoplay interval="5000" duration="500">
     <block wx:for="{{item.images}}" wx:key="*this">
@@ -13,22 +14,45 @@
   <view class="detail-title">{{item.title}}</view>
   <!-- 商品描述 -->
   <view class="detail-description">{{item.content}}</view>
+
+  <!-- 用户信息展示区域 -->
   <!-- 发布人信息 -->
-  <view class="publisher-info-container">
-    <view class="publisher-info-left">
+  <view class="user-info-container publisher-info">
+    <view class="user-label-container">
+      <span class="user-label publisher-label">发布者：</span>
+    </view>
+    <div class="publisher-info-left">
       <image src="{{item.avatarUrl}}" class="avatar" mode="aspectFill"></image>
-      <view class="publisher-name">{{item.username}}</view>
-    </view>
-    <view class="publisher-info-right">
-      <view class="family-name">家庭住址：{{item.family_id}}</view>
-      <view class="publish-time">发布时间:{{item.create_time}}</view>
-    </view>
+      <span class="publisher-name">{{item.username}}</span>
+    </div>
+    <div class="publisher-info-right">
+      <span class="family-name">家庭住址：{{item.family_id}}</span>
+      <span class="publish-time">发布时间:{{item.create_time}}</span>
+    </div>
+    <view class="divider"></view>
   </view>
+  <!-- 帮助人信息 -->
+  <view class="user-info-container helper-info" wx:if="{{helpUserInfo._id}}">
+    <view class="user-label-container">
+      <span class="user-label helper-label">帮助者：</span>
+    </view>
+    <div class="publisher-info-left">
+      <image src="{{helpUserInfo.avatarUrl}}" class="avatar" mode="aspectFill"></image>
+      <span class="publisher-name">{{helpUserInfo.username}}</span>
+    </div>
+    <div class="publisher-info-right">
+      <span class="family-name">家庭住址：{{helpUserInfo.family_id}}</span>
+      <span class="publish-time">帮助时间:{{item.help_time}}</span>
+    </div>
+    <view class="divider"></view>
+  </view>
+
+  <!-- 操作按钮区域 -->
   <!-- 帮助按钮 -->
-  <button wx:if="{{flag!=1}}" class="help-btn" bindtap="handleHelp">
-    <text>帮助</text>
-  </button>
-  <button wx:elif="{{flag==1&&del==0}}" class="help-btn" bindtap="handleHelp">
+  <button wx:if="{{isOwner&&!isDel}}" class="help-btn" bindtap="handleEdit">
     <text>编辑</text>
+  </button>
+  <button wx:elif="{{!isOwner&&!isDel}}" class="help-btn" bindtap="handleHelp">
+    <text>帮助</text>
   </button>
 </view>

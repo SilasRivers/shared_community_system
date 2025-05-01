@@ -21,6 +21,10 @@ exports.main = async (event, context) => {
     res.data.type = publishTypeRes.data[0].type
     res.data.avatarUrl = userRes.data.avatarUrl
     res.data.username = userRes.data.username
+    if (res.data.target_user_id != "") {
+      const targetUserRes = await db.collection('user').doc(res.data.target_user_id).get()
+      res.data.targetUserInfo = targetUserRes.data
+    }
     return {
       data: res.data,
     }

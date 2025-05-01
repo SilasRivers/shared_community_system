@@ -5,9 +5,23 @@ Page({
     selectedTypeId: null,
     publishTitle: '',
     publishContent: '',
-    publishImages: []
+    publishImages: [],
+    isUpdate: false,
+    productId: null
   },
-  onLoad() {
+  onLoad(options) {
+    // 从本地存储中获取数据
+    const publishData = wx.getStorageSync('publishData');
+    if (publishData) {
+      this.setData({
+        productId: publishData.productId,
+        publishTitle: publishData.publishTitle,
+        publishContent: publishData.publishContent,
+        publishImages: publishData.publishImages
+      });
+      // 使用完后删除本地存储中的数据
+      wx.removeStorageSync('publishData');
+    }
     this.fetchPublishTypes();
   },
   fetchPublishTypes() {
@@ -86,7 +100,7 @@ Page({
     });
   },
   async publish() {
-    const { publishTypes, selectedTypeIndex, selectedTypeId, publishTitle, publishContent, publishImages } = this.data;
+    const { publishTypes, selectedTypeIndex, selectedTypeId, publishTitle, publishContent, publishImages,productId } = this.data;
     const publishType = publishTypes[selectedTypeIndex];
     if (!publishType) {
       wx.showToast({
@@ -123,12 +137,13 @@ Page({
         images: imageUrls,
         status: false,
         user_id: userInfo._id,
-        createTime: new Date()  // 添加发布时间
+        createTime: new Date(),  // 添加发布时间
+        productId: productId
       },
       success: res => {
         if (res.result.code == 200) {
           wx.showToast({
-            title: '发布成功',
+            title: res.result.message,
             icon: 'success'
           });
           console.log("发布成功")
@@ -148,7 +163,7 @@ Page({
           // })
         } else {
           wx.showToast({
-            title: '发布失败',
+            title: res.result.message,
             icon: 'none'
           });
         }
@@ -165,17 +180,21 @@ Page({
   async uploadImages(images) {
     const imageUrls = [];
     for (let i = 0; i < images.length; i++) {
-      const imagePath = images[i];
-      const cloudPath = `images/${Date.now()}-${i}-${Math.floor(Math.random() * 1000)}.png`;
-      try {
-        const uploadRes = await wx.cloud.uploadFile({
-          cloudPath,
-          filePath: imagePath
-        });
-        const fileID = uploadRes.fileID;
-        imageUrls.push(fileID);
-      } catch (error) {
-        console.error(`图片上传失败: ${error}`);
+      if (images[i].startsWith('cloud')) {
+        imageUrls.push(images[i]);
+      } else {
+        const imagePath = images[i];
+        const cloudPath = `images/${Date.now()}-${i}-${Math.floor(Math.random() * 1000)}.png`;
+        try {
+          const uploadRes = await wx.cloud.uploadFile({
+            cloudPath,
+            filePath: imagePath
+          });
+          const fileID = uploadRes.fileID;
+          imageUrls.push(fileID);
+        } catch (error) {
+          console.error(`图片上传失败: ${error}`);
+        }
       }
     }
     return imageUrls;

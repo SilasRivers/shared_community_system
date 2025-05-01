@@ -122,9 +122,6 @@ Page({
             visiblePublishTypes: visible,
             hasMoreTypes: hasMore
             //.map(item => item.type)
-          }, () => {
-            // 在回调函数中查看更新后的值
-            console.log('更新后的 publishTypes: ', this.data.allPublishTypes);
           });
         }
       },
@@ -153,8 +150,11 @@ Page({
   },
   goToDetail(e) {
     const productId = e.currentTarget.dataset.id;
+    const user_id = e.currentTarget.dataset.user_id;
+    const userInfo = wx.getStorageSync('token')
+    const isOwner = (userInfo._id == user_id) ? true : false
     wx.navigateTo({
-      url: `/pages/detail/detail?id=${productId}`
+      url: `/pages/detail/detail?id=${productId}&isOwner=${isOwner}&del=false`
     });
   },
   showMoreTypes() {

@@ -48,7 +48,7 @@ Page({
   goToDetail(e) {
     const productId = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: `/pages/detail/detail?id=${productId}&flag=1&del=${this.data.currentIdx}`
+      url: `/pages/detail/detail?id=${productId}&del=true&isOwner=true`
     });
   },
   goToPublish(e) {

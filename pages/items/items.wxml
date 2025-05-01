@@ -18,13 +18,25 @@
       <button class="publish-btn" bind:tap="goToPublish">发布宝贝</button>
     </view>
     <view wx:else class="item-list">
-      <view class="item" wx:for="{{contentList}}" wx:key="_id" bind:tap="goToDetail" data-id="{{item._id}}">
+      <view class="item" wx:for="{{contentList}}" wx:key="_id" bind:tap="goToDetail" data-id="{{item._id}}" data-index="{{index}}" bindlongpress="showDeletePopup">
         <view class="message-image">
           <image src="{{item.images[0]}}" mode="aspectFill" class="item-cover"></image>
         </view>
         <view class="item-info">
           <view class="item-title">主题：{{item.title}}</view>
           <view class="item-description">描述：{{item.content}}</view>
+        </view>
+      </view>
+      <!-- 遮罩层 -->
+      <view class="mask" wx:if="{{showPopup[index]}}"></view>
+      <!-- 弹窗层 -->
+      <view class="popup" wx:if="{{showPopup[index]}}">
+        <view class="popup-content">
+          <text class="popup-text">确定要删除该商品吗？</text>
+          <view class="popup-buttons">
+            <view class="delete-button" bind:tap="deleteGoods" data-index="{{index}}">删除</view>
+            <view class="cancel-button" bind:tap="hidePopup" data-index="{{index}}">取消</view>
+          </view>
         </view>
       </view>
     </view>
