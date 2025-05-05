@@ -2,7 +2,7 @@
   <view class="post-header">
     <view class="author-info">
       <image class="avatar" src="{{post.avatarUrl}}"></image>
-      <text class="author-name">{{post.name}}</text>
+      <text class="author-name">{{post.username}}</text>
     </view>
     <text class="post-time">{{post.postTime}}</text>
   </view>
